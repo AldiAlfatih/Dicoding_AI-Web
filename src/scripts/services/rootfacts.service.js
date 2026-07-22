@@ -1,4 +1,4 @@
-import { pipeline, env } from "@huggingface/transformers";
+// Removed static import to prevent webpack bundle hoisting issues
 
 class RootFactsService {
   constructor() {
@@ -22,6 +22,7 @@ class RootFactsService {
 
   async loadModel() {
     try {
+      const { pipeline } = await import("@huggingface/transformers");
       const hasWebGPU = await this.checkWebGPU();
       let device = hasWebGPU ? "webgpu" : "wasm";
       this.currentBackend = device;

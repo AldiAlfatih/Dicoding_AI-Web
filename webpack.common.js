@@ -10,8 +10,14 @@ module.exports = {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
+    globalObject: "self",
   },
   module: {
+    parser: {
+      javascript: {
+        importMeta: false,
+      },
+    },
     rules: [
       {
         test: /\.(png|jpe?g|gif)$/i,
