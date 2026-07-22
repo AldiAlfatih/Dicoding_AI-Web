@@ -9,6 +9,7 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -22,7 +23,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"],
+            presets: [["@babel/preset-env", { targets: { esmodules: true } }]],
           },
         },
       },
@@ -31,16 +32,11 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
     ],
-    parser: {
-      javascript: {
-        importMeta: true,
-      },
-    },
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src/index.html"),
-      scriptLoading: "module",
+      scriptLoading: "defer",
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -55,7 +51,8 @@ module.exports = {
       ]
     })
   ],
-  stats: {
-    warningsFilter: /import\.meta/,
+  experiments: {
+    asyncWebAssembly: true,
+    topLevelAwait: true,
   },
 };
