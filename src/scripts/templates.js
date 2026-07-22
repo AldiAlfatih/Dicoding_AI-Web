@@ -102,6 +102,9 @@ function generateResultState() {
         </div>
         <div id="fun-fact-content">
           <p id="fun-fact-text" class="fun-fact-text">Fakta menarik akan muncul di sini...</p>
+          <button id="btn-speak" class="copy-btn" style="right: 3.25rem;" title="Dengarkan fakta">
+            <i data-lucide="volume-2" width="18" height="18"></i>
+          </button>
           <button id="btn-copy" class="copy-btn" title="Salin fakta">
             <i data-lucide="copy" width="18" height="18"></i>
           </button>

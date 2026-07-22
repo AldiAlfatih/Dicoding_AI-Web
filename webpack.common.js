@@ -13,11 +13,6 @@ module.exports = {
     globalObject: "self",
   },
   module: {
-    parser: {
-      javascript: {
-        importMeta: false,
-      },
-    },
     rules: [
       {
         test: /\.(png|jpe?g|gif)$/i,

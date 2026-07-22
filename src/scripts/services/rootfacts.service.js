@@ -22,7 +22,9 @@ class RootFactsService {
 
   async loadModel() {
     try {
-      const { pipeline } = await import("@huggingface/transformers");
+      const { pipeline } = await import(
+        /* webpackIgnore: true */ "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3"
+      );
       const hasWebGPU = await this.checkWebGPU();
       let device = hasWebGPU ? "webgpu" : "wasm";
       this.currentBackend = device;

@@ -29,6 +29,7 @@ class HomePresenter {
     this.funFactText = document.getElementById("fun-fact-text");
     this.funFactLoading = document.getElementById("fun-fact-loading");
     this.btnCopy = document.getElementById("btn-copy");
+    this.btnSpeak = document.getElementById("btn-speak");
 
     this.statusDot = document.getElementById("status-dot");
     this.statusText = document.getElementById("status-text");
@@ -66,6 +67,9 @@ class HomePresenter {
         this.rootFactsService.setTone(e.target.value);
       });
       this.btnCopy.addEventListener("click", () => this.handleCopy());
+      if (this.btnSpeak) {
+        this.btnSpeak.addEventListener("click", () => this.handleSpeak());
+      }
 
     } catch (error) {
       console.error(error);
@@ -170,6 +174,16 @@ class HomePresenter {
       } catch (err) {
         console.error('Failed to copy text: ', err);
       }
+    }
+  }
+
+  handleSpeak() {
+    const text = this.funFactText.textContent;
+    if (text && text !== "Fakta menarik akan muncul di sini..." && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // Stop any ongoing speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
     }
   }
 }
